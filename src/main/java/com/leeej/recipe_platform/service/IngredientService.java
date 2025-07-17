@@ -17,7 +17,7 @@ public class IngredientService {
 
     public IngredientResponseDto create(IngredientDto dto) {
         if(ingredientRepository.findByName(dto.getName()).isPresent()) {
-            throw new IllegalStateException("재료 중복");
+            throw new IllegalStateException("[Ingredient]재료 중복");
         }
 
         Ingredient ingredient = new Ingredient();
