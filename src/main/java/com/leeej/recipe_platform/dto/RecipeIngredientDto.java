@@ -1,6 +1,5 @@
 package com.leeej.recipe_platform.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecipeDto {
-    @NotBlank
-    private String title;
-
+public class RecipeIngredientDto {
+    private Long ingredientId;
+    private String ingredientName;
     private String description;
 }

@@ -1,6 +1,7 @@
 package com.leeej.recipe_platform.controller;
 
 import com.leeej.recipe_platform.dto.AddIngredientDto;
+import com.leeej.recipe_platform.dto.RecipeDetailDto;
 import com.leeej.recipe_platform.dto.RecipeDto;
 import com.leeej.recipe_platform.dto.RecipeResponseDto;
 import com.leeej.recipe_platform.service.RecipeService;
@@ -29,9 +30,27 @@ public class RecipeController {
         return recipeService.list(pageable);
     }
 
+    @GetMapping("/{id}")
+    public RecipeDetailDto get(@PathVariable Long id) {
+        return recipeService.get(id);
+    }
+
     @PostMapping
     public RecipeResponseDto create(@Validated @RequestBody RecipeDto dto) {
         return recipeService.create(dto);
+    }
+
+    @PutMapping("/{id}")
+    public RecipeResponseDto update(@PathVariable Long id, @Validated @RequestBody RecipeDto dto) {
+        return recipeService.update(id, dto);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        recipeService.delete(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/{id}/ingredients/add")
@@ -43,5 +62,15 @@ public class RecipeController {
 
         return ResponseEntity.ok()
                 .build();
+    }
+
+    @DeleteMapping("/{id}/ingredients/{ingredientId}/remove")
+    public ResponseEntity<Void> removeIngredient(
+            @PathVariable Long id,
+            @PathVariable Long ingredientId
+    ) {
+        recipeService.removeIngredient(id, ingredientId);
+
+        return ResponseEntity.noContent().build();
     }
 }
